@@ -1,6 +1,10 @@
 import "./global.css";
-import { Slot } from "expo-router";
+import { Tabs } from "expo-router";
 
 export default function Layout() {
-  return <Slot />;
+  return (
+    <Tabs tabBar={props => ()}>
+      <Tabs.Screen name="notes/index" options={{ title: "Notes" }} />
+    </Tabs>
+  );
 }
