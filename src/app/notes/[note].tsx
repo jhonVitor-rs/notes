@@ -1,5 +1,5 @@
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   SafeAreaView,
   KeyboardAvoidingView,
@@ -11,8 +11,8 @@ import {
   darkEditorTheme,
   RichText,
   TenTapStartKit,
-  Toolbar,
   useEditorBridge,
+  useEditorContent,
 } from "@10play/tentap-editor";
 import { editorTheme } from "@/components/editor/theme";
 import { ToolbarPlugin } from "@/components/editor/toolbarPlugin";
@@ -25,6 +25,11 @@ export default function Basic({}: NativeStackScreenProps<any, any, any>) {
     theme: darkEditorTheme,
     bridgeExtensions: [...TenTapStartKit, CoreBridge.configureCSS(editorTheme)],
   });
+
+  const content = useEditorContent(editor, { type: "html" });
+  // useEffect(() => {
+  //   console.log(content);
+  // }, [content]);
 
   return (
     <SafeAreaView className="flex-1 bg-slate-900">
