@@ -7,6 +7,7 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 import Foundation from "@expo/vector-icons/Foundation";
+import Octicons from "@expo/vector-icons/Octicons";
 
 interface Props extends PressableProps {
   isFocused: boolean;
@@ -16,9 +17,10 @@ interface Props extends PressableProps {
 }
 
 const icons = {
-  index: (props: any) => (
+  Notes: (props: any) => (
     <Foundation name="clipboard-notes" size={24} {...props} />
   ),
+  Tasks: (props: any) => <Octicons name="tasklist" size={24} {...props} />,
 };
 
 export function TabBarButtom(props: Props) {
@@ -53,7 +55,7 @@ export function TabBarButtom(props: Props) {
   return (
     <Pressable {...props} className="flex-1 justify-center items-center gap-4">
       <Animated.View style={[animatedIconStyle]}>
-        {icons[routeName as keyof typeof icons]?.({ color })}
+        {icons[label as keyof typeof icons]?.({ color })}
       </Animated.View>
       <Animated.Text style={[{ color, fontSize: 11 }, animatedTextStyle]}>
         {label}

@@ -3,23 +3,23 @@ import { View } from "react-native";
 import { TabBarButtom } from "./tabBarButtom";
 import { useKeyboard } from "@10play/tentap-editor";
 
-const excludeRoutes = ["_sitemap", "notes/[note]", "+not-found"];
+const excludeRoutes = ["_sitemap", "+not-found"];
 
 export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
-  const primaryColor = "#f79605";
-  const greyColor = "#737373";
+  const primaryColor = "#0092b8";
+  const secondaryColor = "#a5f3fc";
   const { isKeyboardUp } = useKeyboard();
 
-  // const currentRouteName = state.routes[state.index].name;
-  // const shouldHideTabBar =
-  //   isKeyboardUp || excludeRoutes.includes(currentRouteName);
+  const currentRouteName = state.routes[state.index].name;
+  const shouldHideTabBar =
+    isKeyboardUp || excludeRoutes.includes(currentRouteName);
 
   return (
     <View
       style={{
-        display: isKeyboardUp ? "none" : "flex",
+        display: shouldHideTabBar ? "none" : "flex",
       }}
-      className="absolute bottom-6 flex-row justify-between items-center bg bg-slate-800 mx-5 py-3 rounded-3xl shadow-black/10"
+      className="absolute bottom-0 py-3 flex-row justify-between items-center bg-slate-900 shadow-black/10"
     >
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
@@ -59,7 +59,7 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
             onLongPress={onLongPress}
             isFocused={isFocused}
             routeName={route.name}
-            color={isFocused ? primaryColor : greyColor}
+            color={isFocused ? primaryColor : secondaryColor}
             label={label}
           />
         );

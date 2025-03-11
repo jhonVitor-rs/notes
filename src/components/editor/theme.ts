@@ -2,7 +2,7 @@
 export const editorTheme = `
   body {
     color: #ffffff;
-    background-color: #363636;
+    background-color: #334155;
     padding: 10px;
     align-items: center;
     margin: 0;
