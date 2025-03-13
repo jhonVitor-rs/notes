@@ -14,6 +14,7 @@ export async function GetNotesList() {
     if (!notesListString) return []
 
     const notesList = JSON.parse(notesListString) as NotesList[]
+
     return notesList
   } catch (error) {
     console.error(error)

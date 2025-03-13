@@ -1,12 +1,11 @@
-import 'react-native-get-random-values';
-import { v4 as uuidV4} from "uuid"
 import { Note, NotesList } from "../types/note";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GetNotesList } from './getNotes';
+import { GenId } from "./genId";
 
 export function GenerateNewNote(fatherId: string | null): Note {
   return {
-    id: uuidV4(),
+    id: GenId(),
     title: `New-Note`,
     content: '',
     fatherId,

@@ -11,6 +11,10 @@ import { EditLinkBar } from "@10play/tentap-editor/src/RichText/Toolbar/EditLink
 import { TEXT_STYLE_ITEMS } from "./toolbalContextTextStyle";
 import { TOOLBAR_CONTEXT_MAIN } from "./toolbarContextMain";
 import { TOOLBAR_CONTEXT_LISTS } from "./toolbarContextLists";
+import { useNotes } from "@/providers/notesProvider";
+import { EditNestedNoteBar } from "./addNestedNoteBar";
+import { Note } from "@/utils/types/note";
+import { GenId } from "@/utils/storage/genId";
 
 interface ToolbarProps {
   editor: EditorBridge;
@@ -21,6 +25,7 @@ export const toolbarStyles = StyleSheet.create({});
 
 export function ToolbarPlugin({ editor, hidden = undefined }: ToolbarProps) {
   const editorState = useBridgeState(editor);
+  const { note } = useNotes();
   const { isKeyboardUp } = useKeyboard();
   const [toolbarContext, setToolbarContext] = useState<ToolbarContext>(
     ToolbarContext.Main
@@ -58,42 +63,6 @@ export function ToolbarPlugin({ editor, hidden = undefined }: ToolbarProps) {
             return <ToolbarItemComp {...item} args={args} editor={editor} />;
           }}
           horizontal
-        />
-      );
-    case ToolbarContext.Link:
-      return (
-        <EditLinkBar
-          theme={editor.theme}
-          initialLink={editorState.activeLink}
-          onBlur={() => {
-            if (Platform.OS === "web") {
-              // On web blur is called before onEditLink. This isn't an ideal fix however this is going to be change soon when we
-              // add the new api for toolbar where we will have more control. This is a temporary fix for now.
-              setTimeout(() => {
-                setToolbarContext(ToolbarContext.Main);
-              }, 100);
-            } else {
-              setToolbarContext(ToolbarContext.Main);
-            }
-          }}
-          onLinkIconClick={() => {
-            setToolbarContext(ToolbarContext.Main);
-            editor.focus();
-          }}
-          onEditLink={(link) => {
-            editor.setLink(link);
-            editor.focus();
-
-            if (Platform.OS === "android") {
-              // On android we dont want to hide the link input before we finished focus on editor
-              // Add here 100ms and we can try to find better solution later
-              setTimeout(() => {
-                setToolbarContext(ToolbarContext.Main);
-              }, 100);
-            } else {
-              setToolbarContext(ToolbarContext.Main);
-            }
-          }}
         />
       );
   }

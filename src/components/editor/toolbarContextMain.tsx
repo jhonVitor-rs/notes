@@ -27,25 +27,6 @@ export const TOOLBAR_CONTEXT_MAIN: ToolbarItem[] = [
   },
   {
     onPress:
-      ({ setToolbarContext, editorState, editor }) =>
-      () => {
-        if (Platform.OS === "android") {
-          setTimeout(() => {
-            editor.setSelection(
-              editorState.selection.from,
-              editorState.selection.to
-            );
-          });
-        }
-        setToolbarContext(ToolbarContext.Link);
-      },
-    active: ({ editorState }) => editorState.isLinkActive,
-    disabled: ({ editorState }) =>
-      !editorState.isLinkActive && !editorState.canSetLink,
-    image: () => Images.link,
-  },
-  {
-    onPress:
       ({ editor }) =>
       () =>
         editor.toggleCode(),
