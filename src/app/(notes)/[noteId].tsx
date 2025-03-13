@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import {
   SafeAreaView,
   KeyboardAvoidingView,
@@ -6,30 +6,13 @@ import {
   View,
   TextInput,
   AppState,
-  AppStateStatus,
   Pressable,
 } from "react-native";
-import {
-  CoreBridge,
-  darkEditorTheme,
-  RichText,
-  TenTapStartKit,
-  useEditorBridge,
-  useEditorContent,
-} from "@10play/tentap-editor";
-import { editorTheme } from "@/components/editor/theme";
+import { RichText } from "@10play/tentap-editor";
 import { ToolbarPlugin } from "@/components/editor/toolbarPlugin";
-import {
-  useFocusEffect,
-  useLocalSearchParams,
-  useNavigation,
-} from "expo-router";
-import { Note } from "@/utils/types/note";
-import { SaveNote } from "@/utils/storage/addNote";
-import { useNotes } from "@/providers/notesProvider";
+import { useLocalSearchParams, useNavigation } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { DrawerActions } from "@react-navigation/native";
-import { NotesService } from "@/utils/storage/notes";
 import { EditorHooks } from "@/hooks/editor";
 
 export default function Editor() {
@@ -47,13 +30,7 @@ export default function Editor() {
         >
           <Ionicons name="menu-outline" size={28} color="white" />
         </Pressable>
-        {/* {note.fatherId && (
-          <Pressable onPress={handleGoBack} className="mr-3">
-            <Text>
-              <Ionicons name="arrow-back" size={24} color="white" />
-            </Text>
-          </Pressable>
-        )} */}
+
         <TextInput
           value={title}
           onChangeText={setTitle}

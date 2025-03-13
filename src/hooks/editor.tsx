@@ -30,7 +30,7 @@ export function EditorHooks({ noteId, appState }: props) {
   const editor = useEditorBridge({
     autofocus: false,
     avoidIosKeyboard: true,
-    initialContent: note?.content || "",
+    initialContent: "",
     theme: darkEditorTheme,
     bridgeExtensions: [...TenTapStartKit, CoreBridge.configureCSS(editorTheme)],
   });
@@ -51,6 +51,7 @@ export function EditorHooks({ noteId, appState }: props) {
         setTitle(result.data.title);
         setLastSavedTitle(result.data.title);
         setLastSavedContent(result.data.content || "");
+        editor.setContent(result.data.content);
       }
     } catch (error) {
       console.error("Error loading note:", error);
