@@ -1,4 +1,5 @@
 import { NotesDrawer } from "@/components/notesDrawer";
+import { useNotes } from "@/providers/notesProvider";
 import { Drawer as ExpoDrawer } from "expo-router/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
